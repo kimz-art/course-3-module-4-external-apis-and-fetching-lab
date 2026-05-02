@@ -17,7 +17,29 @@ development.
 
 For this application, you'll be using US state abbreviations. You can find a list of
 state abbreviations on the [US Federal Aviation Administration website](https://www.faa.gov/air_traffic/publications/atpubs/cnt_html/appendix_a.html).
+ data from the API response, like:  
+   * "Current watches, warnings, and advisories for Minnesota: 11"
+* A list of alert headlines, each as its own line or bullet.
+   * Each alert is available as an array under `features` and each alert headline is available under `properties.headline` in the array.
 
+3. Clear and Reset the UI
+
+Each time the user fetches new data:
+
+* Clear the input field.
+* Update the weather alerts display with fresh data, removing any previous data.
+
+4. Error Handling
+
+When something goes wrong (e.g., empty input, bad state code, or network failure):
+
+* Display the message in the error.
+   * from `.catch` this can be accessed using the `message` key:
+```javascript
+.catch(errorObject => console.log(errorObject.message))
+```
+* Show the message in a dedicated `<div id="error-message">`.
+* Ensure this div is hidden and text is cleared when the next successful request is made.
 
 ## Tools & Resources
 
@@ -58,29 +80,7 @@ gracefully.
 
 When the fetch is successful, show:
 
-* A summary message using the `title` property and number of alerts (under the `features` key) in the data from the API response, like:  
-   * "Current watches, warnings, and advisories for Minnesota: 11"
-* A list of alert headlines, each as its own line or bullet.
-   * Each alert is available as an array under `features` and each alert headline is available under `properties.headline` in the array.
-
-3. Clear and Reset the UI
-
-Each time the user fetches new data:
-
-* Clear the input field.
-* Update the weather alerts display with fresh data, removing any previous data.
-
-4. Error Handling
-
-When something goes wrong (e.g., empty input, bad state code, or network failure):
-
-* Display the message in the error.
-   * from `.catch` this can be accessed using the `message` key:
-```javascript
-.catch(errorObject => console.log(errorObject.message))
-```
-* Show the message in a dedicated `<div id="error-message">`.
-* Ensure this div is hidden and text is cleared when the next successful request is made.
+* A summary message using the `title` property and number of alerts (under the `features` key) in the
 
 ## BONUS: Additional Features
 
